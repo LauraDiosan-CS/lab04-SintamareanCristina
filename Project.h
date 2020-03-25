@@ -1,7 +1,7 @@
-#ifndef PROJECT_H
-#define PROJECT_H
-#include <iostream>
-#include <string.h>
+#pragma once
+#include <ostream>
+using namespace std;
+
 class Project {
 private:
     char* gitPath;
@@ -20,6 +20,6 @@ public:
     void setTotalNoOfCommits(int nr);
     Project& operator=(const Project& p);
     bool operator==(const Project& p);
+    friend ostream& operator<<(ostream& os, const Project& p);
 
 };
-#endif

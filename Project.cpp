@@ -1,6 +1,8 @@
 #include "Project.h"
 #include <string.h>
 #include <iostream>
+#include <cstddef>
+#include <ostream>
 
 using namespace std;
 
@@ -35,7 +37,10 @@ Project::Project(const char* gitPath, int noOfBranches, int totalNoOfCommits)
 Project::Project(const Project& p) 
 {
 	this->gitPath = new char[strlen(p.gitPath) + 1];
-	strcpy_s(this->gitPath, sizeof this->gitPath, p.gitPath);
+	if (p.gitPath) {
+		this->gitPath = new char[strlen(p.gitPath) + 1];
+		strcpy_s(this->gitPath, 1 + strlen(p.gitPath), p.gitPath);
+	}
 	this->noOfBranches = p.noOfBranches;
 	this->totalNoOfCommits = p.totalNoOfCommits;
 }
@@ -128,4 +133,11 @@ Project& Project::operator=(const Project& p) {
 
 bool Project::operator==(const Project& p) {
 	return ((strcmp(this->gitPath, p.gitPath) == 0) && (this->noOfBranches == p.noOfBranches) && (this->totalNoOfCommits == p.totalNoOfCommits));
+}
+
+//pt afisare
+ostream& operator<<(ostream& os, const Project& p)
+{
+	os << "gitPath: " << p.gitPath << ", noOfBranches: " << p.noOfBranches << ", totalNoOfCommits: " << p.totalNoOfCommits;
+	return os;
 }

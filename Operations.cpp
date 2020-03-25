@@ -1,6 +1,7 @@
 #include "Operations.h"
 #include "Repo.h"
 
+//filtreaza elementele de tip Project dupa proprietatea: noOfBranches >= k si totalNoOfCommits >= l
 void filterProjects(Project projects[], int n, int k, int l, Project result[], int& resultLen)
 {
 	resultLen = 0;
@@ -20,6 +21,7 @@ void filterProjectsWithRepo(Repo repo, int n, int k, int l, Project result[], in
 	return filterProjects(initialProjects, n, k, l, result, resultLen);
 }
 
+//sterge elementele de tip Project care au noOfBranches * totalNoOfCommits = 0
 void eliminateProjects(Project projects[], int n, Project result[], int& resultLen)
 {
 	resultLen = 0;
